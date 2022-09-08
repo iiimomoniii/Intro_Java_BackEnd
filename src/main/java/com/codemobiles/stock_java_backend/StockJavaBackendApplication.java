@@ -7,9 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+
+import com.codemobiles.stock_java_backend.util.DateUtils;
 
 //@SpringBootApplication
 @EnableAutoConfiguration
+//scan component is register in project
+@ComponentScan
 public class StockJavaBackendApplication {
 
 	public static void main(String[] args) {
@@ -18,14 +23,14 @@ public class StockJavaBackendApplication {
 	
 	//injection ApplicationContext ctx into function init()
 	@Bean
-	CommandLineRunner init(ApplicationContext ctx) {
-		//return by lambda function
+	CommandLineRunner init(ApplicationContext ctx, DateUtils dateUtils) {
 		return args -> {
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			for(String beanName : beanNames) {
 				System.out.println(beanName);
 			}
+			System.out.println(dateUtils.todayString());
 		};
 	}
 
