@@ -13,21 +13,19 @@ import org.springframework.context.annotation.Bean;
 public class StockJavaBackendApplication {
 
 	public static void main(String[] args) {
-
-		ApplicationContext ctx = SpringApplication.run(StockJavaBackendApplication.class, args);
-		
-		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		for(String beanName : beanNames) {
-			System.out.println(beanName);
-		}
+		SpringApplication.run(StockJavaBackendApplication.class, args);
 	}
 	
+	//injection ApplicationContext ctx into function init()
 	@Bean
-	CommandLineRunner init() {
+	CommandLineRunner init(ApplicationContext ctx) {
 		//return by lambda function
 		return args -> {
-			System.out.println("natdanai");
+			String[] beanNames = ctx.getBeanDefinitionNames();
+			Arrays.sort(beanNames);
+			for(String beanName : beanNames) {
+				System.out.println(beanName);
+			}
 		};
 	}
 
