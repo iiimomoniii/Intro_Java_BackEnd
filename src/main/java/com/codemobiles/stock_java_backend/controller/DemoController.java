@@ -7,12 +7,9 @@ import com.codemobiles.stock_java_backend.util.DateUtils;
 
 @RestController
 public class DemoController {
-	
-	DateUtils dateUtils = new DateUtils();
 
 	@GetMapping("/")
-	String getToday() {
-		
+	String getToday(DateUtils dateUtils) {
 		return dateUtils.todayString();
 	}
 	
