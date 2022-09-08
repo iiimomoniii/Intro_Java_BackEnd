@@ -25,8 +25,10 @@ public class StockJavaBackendApplication {
 	
 	@Bean
 	CommandLineRunner init() {
-		System.out.println("natdanai");
-		return null;
+		//return by lambda function
+		return args -> {
+			System.out.println("natdanai");
+		};
 	}
 
 }
