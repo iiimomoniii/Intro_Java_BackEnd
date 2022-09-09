@@ -1,5 +1,6 @@
 package com.codemobiles.stock_java_backend.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +14,12 @@ public class DemoController {
 	private SayService sayService;
 	
 	//การเเก้ไข multiple bean ใน SayService โดยการเรียก ชื่อ component โดยหลังจากเรียกเเล้วมันก็จะเอาไปลงทะเบียน ใน spring boot ให้
-	//เช่น dog
-	DemoController(DateUtils dateUtils, SayService dog){
+	//เช่น dog 
+	//เเต่วิธีนี้เราก็ต้องมาจำชื่อเเต่ละ component
+	//เเค่ถ้าเพิ่ม @Qualifier เราอยากเรียกอะไรก็ส่งค่าเข้าไปเลย
+	DemoController(DateUtils dateUtils, @Qualifier("cat") SayService sayService){
 		this.dateUtils = dateUtils;
-		this.sayService = dog;
+		this.sayService = sayService;
 	}
 	
 	@GetMapping("/")
