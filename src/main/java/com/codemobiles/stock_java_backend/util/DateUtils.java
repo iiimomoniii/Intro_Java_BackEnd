@@ -3,10 +3,12 @@ package com.codemobiles.stock_java_backend.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 //use @Component register DateUtils into spring project
 @Component
+@Scope("prototype")
 public class DateUtils {
 	
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
