@@ -25,12 +25,12 @@ public class StockJavaBackendApplication {
 	@Bean
 	CommandLineRunner init(ApplicationContext ctx, DateUtils dateUtils) {
 		return args -> {
-			String[] beanNames = ctx.getBeanDefinitionNames();
-			Arrays.sort(beanNames);
-			for(String beanName : beanNames) {
-				System.out.println(beanName);
-			}
-			System.out.println(dateUtils.todayString());
+//			String[] beanNames = ctx.getBeanDefinitionNames();
+//			Arrays.sort(beanNames);
+//			for(String beanName : beanNames) {
+//				System.out.println(beanName);
+//			}
+//			System.out.println(dateUtils.todayString());
 		};
 	}
 

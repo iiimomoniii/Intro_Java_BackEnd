@@ -11,6 +11,10 @@ public class DateUtils {
 	
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	
+	public DateUtils() {
+		System.out.println("object created");
+	}
+	
 	public String todayString() {
 		return simpleDateFormat.format(new Date());
 	}
