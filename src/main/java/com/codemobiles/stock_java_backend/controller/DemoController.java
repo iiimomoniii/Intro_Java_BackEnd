@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codemobiles.stock_java_backend.util.DateUtils;
 
-@RestController
+//@RestController
 public class DemoController {
 
 	DateUtils dateUtils;

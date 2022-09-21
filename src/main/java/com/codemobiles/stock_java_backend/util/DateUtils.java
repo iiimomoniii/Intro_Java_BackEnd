@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 //use @Component register DateUtils into spring project
-@Component
-@Scope("prototype")
+//@Component
+//@Scope("prototype")
 public class DateUtils {
 	
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
