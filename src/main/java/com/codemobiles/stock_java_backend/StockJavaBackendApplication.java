@@ -24,6 +24,9 @@ public class StockJavaBackendApplication {
 	//injection ApplicationContext ctx into function init()
 	@Bean
 	CommandLineRunner init(ApplicationContext ctx, DateUtils dateUtils) {
+		
+		DateUtils obj1 = ctx.getBean(DateUtils.class);
+		
 		return args -> {
 //			String[] beanNames = ctx.getBeanDefinitionNames();
 //			Arrays.sort(beanNames);
