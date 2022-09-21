@@ -17,7 +17,7 @@ public class DemoController {
 	//เช่น dog 
 	//เเต่วิธีนี้เราก็ต้องมาจำชื่อเเต่ละ component
 	//เเค่ถ้าเพิ่ม @Qualifier เราอยากเรียกอะไรก็ส่งค่าเข้าไปเลย
-	DemoController(DateUtils dateUtils, @Qualifier("cat") SayService sayService){
+	DemoController(DateUtils dateUtils, @Qualifier("cat_sound") SayService sayService){
 		this.dateUtils = dateUtils;
 		this.sayService = sayService;
 	}
@@ -39,7 +39,7 @@ interface SayService {
 }
 
 //register Cat
-@Component
+@Component("cat_sound")
 class Cat implements SayService {
 	@Override
 	public String say() {
