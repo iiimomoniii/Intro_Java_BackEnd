@@ -26,6 +26,10 @@ public class StockJavaBackendApplication {
 	CommandLineRunner init(ApplicationContext ctx, DateUtils dateUtils) {
 		
 		DateUtils obj1 = ctx.getBean(DateUtils.class);
+		DateUtils obj2 = ctx.getBean(DateUtils.class);
+		
+		ctx.getAutowireCapableBeanFactory().destroyBean(obj1);
+		ctx.getAutowireCapableBeanFactory().destroyBean(obj2);
 		
 		return args -> {
 //			String[] beanNames = ctx.getBeanDefinitionNames();
