@@ -54,7 +54,15 @@ public class ProductController {
 		return "Get Product By Name : " + name;
 	}
 	
-	//POST MAN : 
+	//POST MAN : curl --location --request POST 'http://localhost:1150/product' \
+	//	--header 'Content-Type: application/json' \
+	//	--data-raw '{
+	//	    "id" : 1,
+	//	    "name" : "pen",
+	//	    "image" : "pen.jpg",
+	//	    "price" : 10,
+	//	    "stock" : 5
+	//	}'
 	@PostMapping()
 	public Product addProduct(@RequestBody Product product) {
 		return product;
