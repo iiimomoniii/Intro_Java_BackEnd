@@ -37,9 +37,15 @@ public class ProductController {
 		return "Get Product By ID : " + id + " Name : " + name;
 	}
 	
-	//POST MAN : http://localhost:1150/getProduct/name?name=natdanai
+//	//POST MAN : http://localhost:1150/getProduct/name?name=natdanai
+//	@GetMapping({"/getProduct/name"})
+//	public String getProductByNameQuery(@RequestParam("name") String name) {
+//		return "Get Product By Name : " + name;
+//	}
+	
+	//POST MAN : http://localhost:1150/getProduct/name?name
 	@GetMapping({"/getProduct/name"})
-	public String getProductByNameQuery(@RequestParam("name") String name) {
+	public String getProductByNameQuery(@RequestParam(name = "name", required = false, defaultValue = "cat") String name) {
 		return "Get Product By Name : " + name;
 	}
 }
