@@ -9,30 +9,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
 	//request -> path -> process -> response
 	//POST MAN : http://localhost:1150/getProducts
-	@GetMapping("/getProducts")
+	@GetMapping("")
 	public String getProducts() {
 		return "Get Product All";
 	}
 	
 	//POST MAN : http://localhost:1150/getProduct/1
-	@GetMapping("/getProduct/{id}")
+	@GetMapping("/{id}")
 	public String getProductById(@PathVariable long id) {
 		return "Get Product By ID : " + id;
 	}
 	
 	
 	//POST MAN : http://localhost:1150/getProduct/id/1/name/test
-//	@GetMapping("/getProduct/id/{id}/name/{name}")
+//	@GetMapping("/id/{id}/name/{name}")
 //	public String getProductByIdAndName(@PathVariable long id,  @PathVariable String name) {
 //		return "Get Product By ID : " + id + " Name : " + name;
 //	}
 	
 	//POST MAN : http://localhost:1150/getProduct/id/1
-	@GetMapping({"/getProduct/id/{id}/name/{name}","/getProduct/id/{id}"})
+	@GetMapping({"/id/{id}/name/{name}","/getProduct/id/{id}"})
 	public String getProductByIdAndName(@PathVariable(value="id") long id,  @PathVariable(required = false) String name) {
 		return "Get Product By ID : " + id + " Name : " + name;
 	}
@@ -44,7 +45,7 @@ public class ProductController {
 //	}
 	
 	//POST MAN : http://localhost:1150/getProduct/name?name
-	@GetMapping({"/getProduct/name"})
+	@GetMapping({"/name"})
 	public String getProductByNameQuery(@RequestParam(name = "name", required = false, defaultValue = "cat") String name) {
 		return "Get Product By Name : " + name;
 	}
