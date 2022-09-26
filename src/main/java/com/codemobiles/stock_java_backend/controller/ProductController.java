@@ -1,5 +1,9 @@
 package com.codemobiles.stock_java_backend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,18 +19,24 @@ import com.codemobiles.stock_java_backend.model.Product;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+	
+	private final AtomicLong counter = new AtomicLong();
+	private List<Product> products = new ArrayList<>();
 
+	
 	//request -> path -> process -> response
 	//POST MAN : http://localhost:1150/getProducts
-	@GetMapping("")
-	public String getProducts() {
-		return "Get Product All";
+	@GetMapping()
+	public List<Product> getProducts() {
+		return products;
 	}
 	
 	//POST MAN : http://localhost:1150/getProduct/1
 	@GetMapping("/{id}")
-	public String getProductById(@PathVariable long id) {
-		return "Get Product By ID : " + id;
+	public Product getProductById(@PathVariable long id) {
+		return products.stream()
+				.filter(result -> result.getId() == id)
+				.findFirst().orElseThrow(null);
 	}
 	
 	
@@ -65,6 +75,14 @@ public class ProductController {
 	//	}'
 	@PostMapping()
 	public Product addProduct(@RequestBody Product product) {
-		return product;
+		Product data = new Product(
+				counter.incrementAndGet(),
+				product.getName(),
+				product.getImage(),
+				product.getPrice(),
+				product.getStock()
+				);
+		products.add(data);
+		return data;
 	}
 }
