@@ -3,10 +3,14 @@ package com.codemobiles.stock_java_backend.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.codemobiles.stock_java_backend.model.Product;
 
 @RestController
 @RequestMapping("/product")
@@ -48,5 +52,11 @@ public class ProductController {
 	@GetMapping({"/name"})
 	public String getProductByNameQuery(@RequestParam(name = "name", required = false, defaultValue = "cat") String name) {
 		return "Get Product By Name : " + name;
+	}
+	
+	//POST MAN : 
+	@PostMapping()
+	public Product addProduct(@RequestBody Product product) {
+		return product;
 	}
 }
