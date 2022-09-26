@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,14 +88,13 @@ public class ProductController {
 		return data;
 	}
 	
-	//POST MAN : curl --location --request PUT 'http://localhost:1150/product' \
+	//POST MAN : curl --location --request PUT 'http://localhost:1150/product/1' \
 	//	--header 'Content-Type: application/json' \
 	//	--data-raw '{
-	//	    "id" : 1,
-	//	    "name" : "pen",
-	//	    "image" : "pen.jpg",
-	//	    "price" : 10,
-	//	    "stock" : 5
+	//	    "name" : "fish",
+	//	    "image" : "fish.jpg",
+	//	    "price" : 99,
+	//	    "stock" : 88
 	//	}'
 	@PutMapping("/{id}")
 	public void editProduct(@RequestBody Product product, @PathVariable Long id) {
@@ -110,6 +110,20 @@ public class ProductController {
 					result.setPrice(product.getPrice());
 					result.setStock(product.getStock());
 				}
+		);
+	}
+	
+	//POST MAN : curl --location --request DELETE 'http://localhost:1150/product/3' \
+	//--data-raw ''
+	@DeleteMapping("/{id}")
+	public void deleteProduct(@PathVariable Long id) {
+		products.stream()
+		.filter(
+				result -> result.getId() == id)
+		.findFirst()
+		.ifPresent(
+				result -> 
+					products.remove(result)
 		);
 	}
 	
