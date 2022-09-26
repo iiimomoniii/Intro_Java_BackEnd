@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,4 +86,31 @@ public class ProductController {
 		products.add(data);
 		return data;
 	}
+	
+	//POST MAN : curl --location --request PUT 'http://localhost:1150/product' \
+	//	--header 'Content-Type: application/json' \
+	//	--data-raw '{
+	//	    "id" : 1,
+	//	    "name" : "pen",
+	//	    "image" : "pen.jpg",
+	//	    "price" : 10,
+	//	    "stock" : 5
+	//	}'
+	@PutMapping("/{id}")
+	public void editProduct(@RequestBody Product product, @PathVariable Long id) {
+		Product data;
+		products.stream()
+		.filter(
+				result -> result.getId() == id)
+		.findFirst()
+		.ifPresent(
+				result -> {
+					result.setName(product.getName());
+					result.setImage(product.getImage());
+					result.setPrice(product.getPrice());
+					result.setStock(product.getStock());
+				}
+		);
+	}
+	
 }
