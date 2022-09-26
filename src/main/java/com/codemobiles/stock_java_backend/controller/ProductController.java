@@ -117,10 +117,5 @@ public class ProductController {
 				});
 	}
 	
-	@ExceptionHandler
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	String handleProductNotFound(ProductNotFoundException ex) {
-		return ex.getMessage();
-	}
-
+	
 }
