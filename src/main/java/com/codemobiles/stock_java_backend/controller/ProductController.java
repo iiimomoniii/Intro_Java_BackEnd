@@ -78,6 +78,7 @@ public class ProductController {
 	// "price" : 10,
 	// "stock" : 5
 	// }'
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping()
 	public Product addProduct(@RequestBody Product product) {
 		Product data = new Product(counter.incrementAndGet(), product.getName(), product.getImage(), product.getPrice(),
@@ -109,6 +110,7 @@ public class ProductController {
 	// POST MAN : curl --location --request DELETE 'http://localhost:1150/product/3'
 	// \
 	// --data-raw ''
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void deleteProduct(@PathVariable Long id) {
 		products.stream().filter(result -> result.getId() == id).findFirst()
