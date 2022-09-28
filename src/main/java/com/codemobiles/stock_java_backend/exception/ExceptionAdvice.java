@@ -31,5 +31,11 @@ public class ExceptionAdvice {
 	String handleMaxUploadSizeExceptionNotFound(MaxUploadSizeExceededException ex) {
 		return "maximum upload size exceeded";
 	}
+	
+	@ExceptionHandler
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	String handleValidationExceptionNotFound(ValidationException ex) {
+		return ex.getMessage();
+	}
 
 }

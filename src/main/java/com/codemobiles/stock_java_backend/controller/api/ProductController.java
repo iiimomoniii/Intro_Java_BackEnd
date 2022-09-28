@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.codemobiles.stock_java_backend.controller.request.ProductRequest;
 import com.codemobiles.stock_java_backend.exception.ProductNotFoundException;
+import com.codemobiles.stock_java_backend.exception.ValidationException;
 import com.codemobiles.stock_java_backend.model.Product;
 import com.codemobiles.stock_java_backend.service.StorageService;
 
@@ -31,10 +35,10 @@ public class ProductController {
 
 	private final AtomicLong counter = new AtomicLong();
 	private List<Product> products = new ArrayList<>();
-	
+
 	private StorageService storageService;
-	
-	ProductController(StorageService storageService){
+
+	ProductController(StorageService storageService) {
 		this.storageService = storageService;
 	}
 
@@ -89,14 +93,16 @@ public class ProductController {
 	// }'
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping()
-	public Product addProduct(ProductRequest productRequest) {
+	public Product addProduct(@Valid ProductRequest productRequest, BindingResult bindingResult) {
+		//check error 
+		if (bindingResult.hasErrors()) {
+			bindingResult.getFieldErrors().stream().forEach(fieldError -> {
+				throw new ValidationException(fieldError.getField()+ ": "+ fieldError.getDefaultMessage());
+			});
+		}
 		String fileName = storageService.store(productRequest.getImage());
-		Product data = new Product(
-				counter.incrementAndGet(), 
-				productRequest.getName(), 
-				fileName, 
-				productRequest.getPrice(),
-				productRequest.getStock());
+		Product data = new Product(counter.incrementAndGet(), productRequest.getName(), fileName,
+				productRequest.getPrice(), productRequest.getStock());
 		products.add(data);
 		return data;
 	}
@@ -132,6 +138,5 @@ public class ProductController {
 					throw new ProductNotFoundException(id);
 				});
 	}
-	
-	
+
 }
