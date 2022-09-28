@@ -1,4 +1,4 @@
-package com.codemobiles.stock_java_backend.controller;
+package com.codemobiles.stock_java_backend.controller.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.codemobiles.stock_java_backend.controller.request.ProductRequest;
 import com.codemobiles.stock_java_backend.exception.ProductNotFoundException;
 import com.codemobiles.stock_java_backend.model.Product;
+import com.codemobiles.stock_java_backend.service.StorageService;
 
 @RestController
 @RequestMapping("/product")
@@ -28,6 +31,12 @@ public class ProductController {
 
 	private final AtomicLong counter = new AtomicLong();
 	private List<Product> products = new ArrayList<>();
+	
+	private StorageService storageService;
+	
+	ProductController(StorageService storageService){
+		this.storageService = storageService;
+	}
 
 	// request -> path -> process -> response
 	// POST MAN : http://localhost:1150/getProducts
@@ -80,9 +89,14 @@ public class ProductController {
 	// }'
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping()
-	public Product addProduct(@RequestBody Product product) {
-		Product data = new Product(counter.incrementAndGet(), product.getName(), product.getImage(), product.getPrice(),
-				product.getStock());
+	public Product addProduct(ProductRequest productRequest) {
+		String fileName = storageService.store(productRequest.getImage());
+		Product data = new Product(
+				counter.incrementAndGet(), 
+				productRequest.getName(), 
+				fileName, 
+				productRequest.getPrice(),
+				productRequest.getStock());
 		products.add(data);
 		return data;
 	}

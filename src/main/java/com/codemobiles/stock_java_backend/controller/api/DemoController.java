@@ -1,4 +1,4 @@
-package com.codemobiles.stock_java_backend.controller;
+package com.codemobiles.stock_java_backend.controller.api;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
