@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ import com.codemobiles.stock_java_backend.service.StorageService;
 
 @RestController
 @RequestMapping("/product")
+@CrossOrigin("https://www.w3schools.com")
 public class ProductController {
 
 	private final AtomicLong counter = new AtomicLong();
