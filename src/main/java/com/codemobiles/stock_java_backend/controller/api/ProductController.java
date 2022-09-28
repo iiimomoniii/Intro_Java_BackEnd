@@ -33,7 +33,7 @@ import com.codemobiles.stock_java_backend.service.StorageService;
 
 @RestController
 @RequestMapping("/product")
-
+//@CrossOrigin
 public class ProductController {
 
 	private final AtomicLong counter = new AtomicLong();
@@ -47,7 +47,6 @@ public class ProductController {
 
 	// request -> path -> process -> response
 	// POST MAN : http://localhost:1150/getProducts
-	@CrossOrigin(methods = { RequestMethod.GET }, origins = {"https://www.w3schools.com"})
 	@GetMapping()
 	public List<Product> getProducts() {
 		return products;
