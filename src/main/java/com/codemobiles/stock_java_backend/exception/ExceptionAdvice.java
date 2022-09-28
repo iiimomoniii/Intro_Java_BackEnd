@@ -16,5 +16,11 @@ public class ExceptionAdvice {
 	String handleProductNotFound(ProductNotFoundException ex) {
 		return ex.getMessage();
 	}
+	
+	@ExceptionHandler
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	String handleStorageExceptionNotFound(StorageException ex) {
+		return ex.getMessage();
+	}
 
 }

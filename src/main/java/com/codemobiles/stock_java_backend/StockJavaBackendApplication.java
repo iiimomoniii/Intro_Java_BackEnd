@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.codemobiles.stock_java_backend.service.StorageService;
 import com.codemobiles.stock_java_backend.util.DateUtils;
 
 @SpringBootApplication
@@ -19,4 +20,10 @@ public class StockJavaBackendApplication {
 		SpringApplication.run(StockJavaBackendApplication.class, args);
 	}
 
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return args -> {
+			storageService.init();
+		};
+	}
 }
