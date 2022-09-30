@@ -12,7 +12,7 @@ public class CorsConfig implements WebMvcConfigurer {
 		//ปลดล๊อค /** cors ทั้งหมด
 		registry.addMapping("/**");
 		//ให้เข้าถึง product เเละใช้เฉพาะ GET POST method เท่านั้น
-		registry.addMapping("/product/*").allowedMethods("GET","POST");
+		registry.addMapping("/product/*").allowedMethods("*");
 	}
 
 }
